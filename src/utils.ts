@@ -1,3 +1,5 @@
+import { Md5 } from 'ts-md5/dist/md5';
+
 export const fastHash = (str: string): number => {
   let hash = 5381;
   let i = str.length;
@@ -17,6 +19,11 @@ export const sdbm = (str: string): number => {
   }
 
   return hash;
+};
+
+export const md5 = (str: string): number => {
+  const hash = Md5.hashStr(str, true).toString();
+  return parseInt(hash, 10);
 };
 
 export class Timer {
