@@ -1,41 +1,5 @@
-import * as fs from 'fs';
 import BloomFilter from './BloomFilter';
-import { fastHash, sdbm, md5, Timer } from './utils';
-
-const read = (path: string): Promise<string> => new Promise((resolve, reject) => {
-  fs.readFile(path, (err, data) => {
-    if (err) {
-      reject(err);
-      return;
-    }
-
-    resolve(data.toString());
-  });
-});
-
-const makeWords = (count: number = 10, maxLength: number = 16): string[] => {
-  const letters = 'abcdefghijklmnopqrstuvwxyz'.split('');
-  return Array.from<string>({ length: count })
-    .map(() => {
-      const limit = Math.ceil(Math.random() * maxLength);
-      return Array.from<string>({ length: limit }).map(() => {
-        const idx = Math.floor(Math.random() * letters.length);
-        return letters[idx];
-      }).join('');
-    });
-};
-
-const checkAllWords = (words: string[], bloomFilter: BloomFilter<string>, onlyTrue = false): { [key: string]: boolean } => {
-  return words.reduce((result: {[key: string]: boolean}, word) => {
-      const isReal = bloomFilter.query(word);;
-      
-      if (!onlyTrue || isReal) {
-        result[word] = isReal;
-      }
-
-      return result;
-    }, {});
-};
+import { fastHash, sdbm, md5, Timer, read, checkAllWords, makeWords } from './utils';
 
 const run = async () => {
   const readTimer = new Timer('Read dictionary');
