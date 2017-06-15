@@ -1,5 +1,14 @@
 import BloomFilter from './BloomFilter';
-import { fastHash, sdbm, md5, Timer, read, checkAllWords, makeWords } from './utils';
+
+import {
+  fastHash,
+  sdbm,
+  md5,
+  Timer,
+  read,
+  checkAllWords,
+  makeWords,
+} from './utils';
 
 const run = async () => {
   const readTimer = new Timer('Read dictionary');
@@ -18,7 +27,21 @@ const run = async () => {
 
   const lookupManyWordsTimer = new Timer('Lookup a word');
   console.log(checkAllWords(
-    ['hello', 'cat', 'dog', 'red', 'ewqeqew', 'fibble', 'gooseparts', 'goose', 'party', 'kettle', 'alphabet', 'xylophone', 'xyllopone'],
+    [
+      'hello',
+      'cat',
+      'dog',
+      'red',
+      'ewqeqew',
+      'fibble',
+      'gooseparts',
+      'goose',
+      'party',
+      'kettle',
+      'alphabet',
+      'xylophone',
+      'xyllopone',
+    ],
     bloomFilter
   ));
   lookupManyWordsTimer.end();
