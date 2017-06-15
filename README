@@ -1,0 +1,3 @@
+# Bloom Filter based spellchecker
+
+A code-kata response, here is a simple bloom filter based spell checker, written in TypeScript. It consumes the local dictionary file (location set for MacOS Sierra dictionary).
